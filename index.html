@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Bites | Healthy Decision Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Intent Reminder Banner -->
+    <div class="intent-banner" id="intentBanner">
+        <div class="banner-content">
+            <i class="fas fa-seedling"></i>
+            <span id="intentText">I eat to feel energized and stable.</span>
+            <button class="edit-intent" id="editIntentBtn">
+                <i class="fas fa-edit"></i> Edit
+            </button>
+        </div>
+        <button class="close-banner" id="closeBannerBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Edit Intent Modal -->
+    <div class="modal" id="intentModal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <h2>Set Your Food Intention</h2>
+            <p>What's your primary goal with eating?</p>
+            <div class="intent-options">
+                <div class="intent-option" data-intent="I eat to feel energized and stable.">
+                    <i class="fas fa-battery-full"></i>
+                    <span>Energy & Stability</span>
+                </div>
+                <div class="intent-option" data-intent="I nourish my body with what it needs.">
+                    <i class="fas fa-heart"></i>
+                    <span>Body Nourishment</span>
+                </div>
+                <div class="intent-option" data-intent="I listen to my body's true hunger signals.">
+                    <i class="fas fa-ear-listen"></i>
+                    <span>Mindful Listening</span>
+                </div>
+                <div class="intent-option" data-intent="I make choices that support my long-term health.">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Long-term Health</span>
+                </div>
+            </div>
+            <div class="custom-intent">
+                <input type="text" id="customIntent" placeholder="Or write your own intention...">
+                <button id="saveCustomIntent">Save</button>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="closeModalBtn">Cancel</button>
+                <button class="btn-primary" id="saveIntentBtn">Save Intention</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Mindful<span class="logo-highlight">Bites</span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active"><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a href="#intentions"><i class="fas fa-bullseye"></i> My Intentions</a></li>
+                <li class="nav-item"><a href="#hunger-check"><i class="fas fa-stethoscope"></i> Hunger Check</a></li>
+                <li class="nav-item"><a href="#environment"><i class="fas fa-compass"></i> Environment Tools</a></li>
+                <li class="nav-item"><a href="#institutional"><i class="fas fa-utensils"></i> Eating Guide</a></li>
+                <li class="nav-item"><a href="#progress"><i class="fas fa-chart-bar"></i> Progress</a></li>
+            </ul>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Decision Support, <span class="highlight">Not</span> Diet Control</h1>
+            <p class="subtitle animate__animated animate__fadeInUp animate__delay-1s">Pause, reflect, and realign momentary food decisions with your long-term health goals</p>
+            
+            <div class="cta-container animate__animated animate__fadeInUp animate__delay-2s">
+                <h3>What's driving this choice right now?</h3>
+                <div class="cta-buttons">
+                    <button class="cta-btn" id="imHungryBtn">
+                        <i class="fas fa-apple-alt"></i>
+                        <span>I'm Hungry</span>
+                    </button>
+                    <button class="cta-btn" id="imCravingBtn">
+                        <i class="fas fa-brain"></i>
+                        <span>I'm Craving</span>
+                    </button>
+                    <button class="cta-btn" id="notSureBtn">
+                        <i class="fas fa-question-circle"></i>
+                        <span>I'm Not Sure</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="floating-elements">
+                <div class="float-element el1"><i class="fas fa-carrot"></i></div>
+                <div class="float-element el2"><i class="fas fa-apple-alt"></i></div>
+                <div class="float-element el3"><i class="fas fa-seedling"></i></div>
+                <div class="float-element el4"><i class="fas fa-lemon"></i></div>
+                <div class="float-element el5"><i class="fas fa-water"></i></div>
+            </div>
+            <div class="hero-image">
+                <div class="pulse-circle"></div>
+                <div class="pulse-circle delay-1"></div>
+                <div class="pulse-circle delay-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hunger Check Section -->
+    <section class="section" id="hunger-check">
+        <div class="section-header">
+            <h2><i class="fas fa-stethoscope"></i> Hunger Check Flow</h2>
+            <p>Take a moment to check in with your body and mind before eating</p>
+        </div>
+        
+        <div class="hunger-check-container">
+            <div class="check-step active" id="step1">
+                <h3>1. Physical Hunger Level</h3>
+                <p>How strong are your physical hunger signals?</p>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>Not hungry</span>
+                        <span>Neutral</span>
+                        <span>Very hungry</span>
+                    </div>
+                    <input type="range" min="0" max="10" value="5" class="slider" id="hungerSlider">
+                    <div class="slider-ticks">
+                        <span></span><span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="slider-value" id="hungerValue">5</div>
+                <button class="btn-next" data-next="step2">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+            
+            <div class="check-step" id="step2">
+                <h3>2. Emotional State</h3>
+                <p>What emotion are you feeling most strongly right now?</p>
+                <div class="emotion-grid">
+                    <div class="emotion-option" data-value="calm">
+                        <i class="fas fa-smile"></i>
+                        <span>Calm/Neutral</span>
+                    </div>
+                    <div class="emotion-option" data-value="stressed">
+                        <i class="fas fa-tired"></i>
+                        <span>Stressed</span>
+                    </div>
+                    <div class="emotion-option" data-value="bored">
+                        <i class="fas fa-meh"></i>
+                        <span>Bored</span>
+                    </div>
+                    <div class="emotion-option" data-value="tired">
+                        <i class="fas fa-bed"></i>
+                        <span>Tired</span>
+                    </div>
+                    <div class="emotion-option" data-value="happy">
+                        <i class="fas fa-laugh"></i>
+                        <span>Happy/Excited</span>
+                    </div>
+                    <div class="emotion-option" data-value="sad">
+                        <i class="fas fa-sad-tear"></i>
+                        <span>Sad/Lonely</span>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn-back" data-back="step1"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn-next" data-next="step3">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="check-step" id="step3">
+                <h3>3. Time Since Last Meal</h3>
+                <p>How long has it been since you last ate?</p>
+                <div class="time-options">
+                    <div class="time-option" data-value="1">
+                        <div class="time-circle">≤1h</div>
+                        <span>Less than 1 hour</span>
+                    </div>
+                    <div class="time-option" data-value="2">
+                        <div class="time-circle">1-3h</div>
+                        <span>1-3 hours</span>
+                    </div>
+                    <div class="time-option" data-value="3">
+                        <div class="time-circle">3-5h</div>
+                        <span>3-5 hours</span>
+                    </div>
+                    <div class="time-option" data-value="4">
+                        <div class="time-circle">5+h</div>
+                        <span>5+ hours</span>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn-back" data-back="step2"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn-next" id="getRecommendationBtn">Get Recommendation</button>
+                </div>
+            </div>
+            
+            <div class="check-step" id="step4">
+                <h3>Your Recommendation</h3>
+                <div class="recommendation-result">
+                    <div class="result-icon" id="resultIcon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4 id="resultTitle">Eat Mindfully</h4>
+                    <p id="resultDescription">You're experiencing moderate hunger but might also be influenced by emotions. Take a moment to eat slowly and check in with your fullness signals.</p>
+                    
+                    <div class="suggestion-box">
+                        <h5><i class="fas fa-lightbulb"></i> Suggestions</h5>
+                        <ul id="suggestionList">
+                            <li>Drink a glass of water before eating</li>
+                            <li>Choose a protein-rich option</li>
+                            <li>Eat without distractions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-actions">
+                        <button class="btn-primary" id="startOverBtn">Start Over</button>
+                        <button class="btn-secondary" id="saveResultBtn">Save This Result</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Institutional Food Guide -->
+    <section class="section alt-section" id="institutional">
+        <div class="section-header">
+            <h2><i class="fas fa-utensils"></i> Institutional Food Guide</h2>
+            <p>Navigate cafeterias, offices, and food courts with confidence</p>
+        </div>
+        
+        <div class="decision-map">
+            <div class="map-step active">
+                <div class="step-number">1</div>
+                <h3>Best Available Option</h3>
+                <p>Look for whole foods with minimal processing</p>
+                <div class="option-examples">
+                    <div class="example good">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Grilled chicken with vegetables</span>
+                    </div>
+                    <div class="example good">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Salad with protein source</span>
+                    </div>
+                    <div class="example good">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Whole grain option</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-step">
+                <div class="step-number">2</div>
+                <h3>Least Disruptive Option</h3>
+                <p>If ideal options aren't available, make small tweaks</p>
+                <div class="option-examples">
+                    <div class="example neutral">
+                        <i class="fas fa-adjust"></i>
+                        <span>Remove sugary sauce/dressing</span>
+                    </div>
+                    <div class="example neutral">
+                        <i class="fas fa-adjust"></i>
+                        <span>Choose baked over fried</span>
+                    </div>
+                    <div class="example neutral">
+                        <i class="fas fa-adjust"></i>
+                        <span>Add side of vegetables</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-step">
+                <div class="step-number">3</div>
+                <h3>Portion or Combination Tweaks</h3>
+                <p>Modify what's available to better align with your goals</p>
+                <div class="option-examples">
+                    <div class="example tweak">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Half portion of main, extra vegetables</span>
+                    </div>
+                    <div class="example tweak">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Combine two sides for balanced meal</span>
+                    </div>
+                    <div class="example tweak">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Water instead of sugary beverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="environment-selector">
+            <h4>Select Your Environment:</h4>
+            <div class="environment-options">
+                <button class="env-option active" data-env="cafeteria">
+                    <i class="fas fa-school"></i>
+                    <span>Cafeteria</span>
+                </button>
+                <button class="env-option" data-env="office">
+                    <i class="fas fa-building"></i>
+                    <span>Office Pantry</span>
+                </button>
+                <button class="env-option" data-env="foodcourt">
+                    <i class="fas fa-store"></i>
+                    <span>Food Court</span>
+                </button>
+                <button class="env-option" data-env="hospital">
+                    <i class="fas fa-hospital"></i>
+                    <span>Hospital</span>
+                </button>
+            </div>
+            
+            <div class="environment-tips" id="environmentTips">
+                <h5><i class="fas fa-lightbulb"></i> Cafeteria Tips:</h5>
+                <ul>
+                    <li>Scan all options before choosing</li>
+                    <li>Look for the simplest preparation methods</li>
+                    <li>Fill half your plate with vegetables when available</li>
+                    <li>Choose water as your beverage</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="section" id="progress">
+        <div class="section-header">
+            <h2><i class="fas fa-chart-bar"></i> Progress & Patterns</h2>
+            <p>Reflect on your choices without judgment or pressure</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-card">
+                <div class="progress-header">
+                    <h4><i class="fas fa-brain"></i> Mindful Decisions This Week</h4>
+                    <div class="progress-number" id="mindfulCount">12</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%"></div>
+                </div>
+                <p class="progress-note">Based on your hunger check completions</p>
+            </div>
+            
+            <div class="progress-card">
+                <div class="progress-header">
+                    <h4><i class="fas fa-heart"></i> Alignment with Intentions</h4>
+                    <div class="progress-number" id="alignmentScore">85%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <p class="progress-note">How often your choices matched your goals</p>
+            </div>
+            
+            <div class="progress-card">
+                <div class="progress-header">
+                    <h4><i class="fas fa-clock"></i> Average Pause Time</h4>
+                    <div class="progress-number" id="pauseTime">47s</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <p class="progress-note">Time spent checking in before eating</p>
+            </div>
+        </div>
+        
+        <div class="reflection-prompt">
+            <h4><i class="fas fa-comment-dots"></i> End-of-Day Reflection</h4>
+            <p class="reflection-question">"Did your food choices today align with how you wanted to feel?"</p>
+            <div class="reflection-options">
+                <button class="reflection-option">
+                    <i class="fas fa-smile"></i>
+                    <span>Yes, mostly</span>
+                </button>
+                <button class="reflection-option">
+                    <i class="fas fa-meh"></i>
+                    <span>Somewhat</span>
+                </button>
+                <button class="reflection-option">
+                    <i class="fas fa-frown"></i>
+                    <span>Not really</span>
+                </button>
+                <button class="reflection-option">
+                    <i class="fas fa-forward"></i>
+                    <span>Skip today</span>
+                </button>
+            </div>
+            <p class="reflection-note">No streaks. No punishment. Just awareness.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Mindful<span class="logo-highlight">Bites</span></span>
+                </div>
+                <p class="footer-tagline">Decision support, not diet control</p>
+                <p class="footer-principle">No calorie obsession • No moral language • Low friction, high empathy</p>
+            </div>
+            
+            <div class="footer-section">
+                <h5>Design Principles</h5>
+                <ul class="principles-list">
+                    <li><i class="fas fa-check-circle"></i> Reduce cognitive load</li>
+                    <li><i class="fas fa-check-circle"></i> Interrupt autopilot behavior</li>
+                    <li><i class="fas fa-check-circle"></i> Honor desires without suppression</li>
+                    <li><i class="fas fa-check-circle"></i> Support autonomy</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h5>Quick Tools</h5>
+                <ul class="footer-links">
+                    <li><a href="#hunger-check"><i class="fas fa-stethoscope"></i> Hunger Check</a></li>
+                    <li><a href="#institutional"><i class="fas fa-compass"></i> Decision Map</a></li>
+                    <li><a href="#" id="digitalDefenseBtn"><i class="fas fa-shield-alt"></i> Digital Defense Mode</a></li>
+                    <li><a href="#" id="smartSwapsBtn"><i class="fas fa-exchange-alt"></i> Smart Swaps</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Made with <i class="fas fa-heart"></i> for sustainable healthy eating decisions</p>
+        </div>
+    </footer>
+
+    <!-- Digital Defense Mode Overlay -->
+    <div class="digital-defense-overlay" id="digitalDefenseOverlay">
+        <div class="defense-content">
+            <h2><i class="fas fa-shield-alt"></i> Digital Food Exposure Defense</h2>
+            <p>Activating visual dampening mode to reduce overstimulation</p>
+            <div class="defense-demo">
+                <div class="food-image dampened">
+                    <div class="food-silhouette"></div>
+                    <div class="food-description">
+                        <h4>Nutritional information available</h4>
+                        <p>This is a food item. Consider your hunger level before proceeding.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-primary" id="closeDefenseBtn">Return to Normal View</button>
+        </div>
+    </div>
+
+    <!-- Smart Swaps Modal -->
+    <div class="modal swaps-modal" id="swapsModal">
+        <div class="modal-content animate__animated animate__slideInUp">
+            <h2><i class="fas fa-exchange-alt"></i> Smart Swap Suggestions</h2>
+            <p>Honor your desire without suppressing it</p>
+            
+            <div class="swap-category">
+                <h4><i class="fas fa-cookie-bite"></i> If you want something crunchy:</h4>
+                <div class="swap-options">
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Apple slices with almond butter</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Carrot or cucumber sticks</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Roasted chickpeas</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swap-category">
+                <h4><i class="fas fa-candy-cane"></i> If you want something sweet:</h4>
+                <div class="swap-options">
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Fruit with Greek yogurt</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Dark chocolate square (70%+)</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Date with nut butter</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swap-category">
+                <h4><i class="fas fa-cheese"></i> If you want something savory:</h4>
+                <div class="swap-options">
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Handful of nuts</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Edamame with sea salt</span>
+                    </div>
+                    <div class="swap-option">
+                        <i class="fas fa-check"></i>
+                        <span>Whole grain crackers with hummus</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-primary" id="closeSwapsBtn">Got It, Thanks!</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
